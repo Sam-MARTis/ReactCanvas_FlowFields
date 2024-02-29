@@ -28,23 +28,25 @@ const doCanvas = (canvasReference) => {
 
   const context = canvas.getContext("2d");
 
-  const cellSize = 100;
+  const cellSize = 40;
 
   // const cellHorizCount = width / cellSize;
   // const cellVertCount = height / cellSize;
 
 
 
-  context.beginPath();
+  
   let delX;
   let delY;
 
   for (let i = 0; i < width; i += cellSize) {
     for (let j = 0; j < height; j += cellSize) {
-      context.strokeStyle = "red";
+      context.beginPath();
+
+      context.strokeStyle = `hsl(${(i/cellSize + j/cellSize)*10}, 100%, 50%)`;
       context.moveTo(i, j);
-      delX = Math.sin(i / cellSize)*cellSize;
-      delY = Math.cos(i / cellSize)*cellSize;
+      delX = Math.sin((i+j) / cellSize)*cellSize/2;
+      delY = Math.cos((i+j) / cellSize)*cellSize/2;
       context.lineTo(i + delX, j + delY);
       context.stroke();
       
